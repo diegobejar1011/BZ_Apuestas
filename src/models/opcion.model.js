@@ -28,3 +28,5 @@ class Opcion {
         return rows;
     }
 }
+
+module.exports = Opcion;
