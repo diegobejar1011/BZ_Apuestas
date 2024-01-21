@@ -1,18 +1,19 @@
 const pool = require('../config/db.config');
 
-class Equipo {
-    constructor(nombre){
-        this.nombre = nombre;
+class Apuesta {
+    constructor(descripcion, activa){
+        this.descripcion = descripcion;
+        this.activa = activa;
     }
 
     async save() {
-        const query = 'INSERT INTO equipo (nombre) VALUES (?)';
-        const [result] = await pool.execute(query,[this.nombre]);
+        const query = 'INSERT INTO apuesta (descripcion, activa) VALUES (?,?)';
+        const [result] = await pool.execute(query,[this.descripcion, this.activa]);
         return result;
     }
 
     static async getAll({offset, limit}, {sort, order}){
-        let query = `SELECT id, nombre FROM equipo`;
+        let query = `SELECT id, descripcion, activa FROM apuesta`;
 
         if(sort && order) {
             query+=`ORDER BY ${sort} ${order}`;
@@ -26,7 +27,6 @@ class Equipo {
 
         return rows;
     }
-
 }
 
-module.exports = Equipo;
+module.exports = Apuesta;
