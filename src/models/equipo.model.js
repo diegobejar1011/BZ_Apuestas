@@ -6,13 +6,13 @@ class Equipo {
     }
 
     async save() {
-        const query = 'INSERT INTO equipo (nombre) VALUES (?)';
+        const query = 'INSERT INTO equipo (nombre_equipo) VALUES (?)';
         const [result] = await pool.execute(query,[this.nombre]);
         return result;
     }
 
     static async getAll({offset, limit}, {sort, order}){
-        let query = `SELECT id, nombre FROM equipo`;
+        let query = `SELECT id, nombre_equipo FROM equipo`;
 
         if(sort && order) {
             query+=`ORDER BY ${sort} ${order}`;

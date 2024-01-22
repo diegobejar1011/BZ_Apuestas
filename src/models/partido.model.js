@@ -28,6 +28,12 @@ class Partido {
 
         return rows;
     }
+
+    static async getUpdated(id){
+        const query = 'SELECT id, equipo1, equipo2, fecha, hora FROM partido WHERE id > ?';
+        const [rows] = await pool.execute(query, [id]);
+        return rows;
+    }
 }
 
 module.exports = Partido;

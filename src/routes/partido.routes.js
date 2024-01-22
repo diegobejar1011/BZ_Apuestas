@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.get("/", partidoControllers.index);
 router.post("/", partidoControllers.create);
+router.get("/nuevos", partidoControllers.getUpdated);
 
 module.exports = router;

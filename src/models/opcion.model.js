@@ -27,6 +27,12 @@ class Opcion {
 
         return rows;
     }
+
+    static updatedPoints = async (operacion, id) => {
+        const query = `UPDATE opcion SET puntos = puntos ${ operacion } WHERE id_equipo = ?`;
+        const [result] = await pool.execute(query, [id]);
+        return result;
+    }
 }
 
 module.exports = Opcion;

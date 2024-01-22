@@ -24,7 +24,7 @@ async function index(req, res) {
 
 async function create(req, res){
     try {
-        const { equipo1, equipo2, fecha, hora} = req.body.nombre;
+        const { equipo1, equipo2, fecha, hora} = req.body;
         const partidoNuevo = new Partido([equipo1, equipo2], fecha, hora);
 
         await partidoNuevo.save();
@@ -41,7 +41,26 @@ async function create(req, res){
     }
 }
 
+async function getUpdated(req, res){
+    try {
+        const id = req.query.ultimoId;
+
+        const partidosNuevos = await Partido.getUpdated(id);
+
+        return res.status(200).json({
+            success: true,
+            partidosNuevos
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            error: error.message
+        })
+    }
+}
+
 module.exports = {
     index,
-    create
+    create,
+    getUpdated
 }

@@ -27,6 +27,16 @@ class Apuesta {
 
         return rows;
     }
+
+    static async updateById (resultado, id) {
+        const query = 'UPDATE apuestas SET activa = 0, resultado = ? WHERE id = ?';
+
+        const [result] = await pool.execute(query, [resultado, id]);
+
+        return result;
+    }
+
+    
 }
 
 module.exports = Apuesta;
